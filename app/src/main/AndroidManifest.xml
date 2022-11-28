@@ -35,6 +35,15 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <provider
+            android:authorities="kr.ac.hallym.termproject.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
     </application>
 
 </manifest>

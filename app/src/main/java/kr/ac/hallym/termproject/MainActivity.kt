@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerMain.adapter = adapter
 
 
+
         toggle = ActionBarDrawerToggle(
             this,
             binding.drawer,
@@ -62,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+
 
 
         val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -101,6 +104,11 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+
+
+
+
 
     fun initData() {
         contents.add(Career("test","테스트입니다"))
