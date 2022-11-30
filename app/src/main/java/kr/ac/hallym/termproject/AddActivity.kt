@@ -15,7 +15,6 @@ import android.widget.Toolbar
 import androidx.appcompat.app.AlertDialog
 import kr.ac.hallym.termproject.databinding.ActivityAddBinding
 import kr.ac.hallym.termproject.databinding.ActivityMainBinding
-import kr.ac.hallym.termproject.databinding.DialogCancelBinding
 
 class AddActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddBinding
@@ -45,7 +44,7 @@ class AddActivity : AppCompatActivity() {
 
                 dialog.run {
                     setTitle("모바일 이력서")
-                    setMessage("작성중인 내용이 사라집니다.")
+                    setMessage("작성중인 내용이 사라집니다.\n정말 종료하시겠습니까?")
                     setNegativeButton("YES", DialogInterface.OnClickListener { dialog, id ->
                         finish()
                     })
