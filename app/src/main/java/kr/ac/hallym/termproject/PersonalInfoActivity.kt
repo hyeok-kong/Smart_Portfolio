@@ -126,7 +126,6 @@ class PersonalInfoActivity : AppCompatActivity() {
                 intent.setPackage("com.android.chrome") // 브라우저를 크롬으로 고정
                 startActivity(intent)
             }
-
         }
     }
 

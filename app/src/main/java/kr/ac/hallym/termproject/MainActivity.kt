@@ -71,13 +71,11 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                val data: Intent? = it.data
-                val title = data?.getStringExtra("title")
-                val detail = data?.getStringExtra("detail")
+                val db = DBHelper(this).readableDatabase
+                val cursor = db.rawQuery("select * from CAREER_TB", null)
+                cursor.moveToLast()
+                contents?.add(Career(cursor.getInt(0), cursor.getString(1), cursor.getString(2)))
 
-                Log.d("kk", "main : $title, $detail")
-
-                contents.add((Career(title.toString(), detail.toString())))
                 adapter.notifyDataSetChanged()
             }
         }
@@ -116,12 +114,14 @@ class MainActivity : AppCompatActivity() {
                 setMessage("추가한 내용을 모두 삭제하시겠습니까?")
                 setNegativeButton("YES", DialogInterface.OnClickListener { dialog, id -> // db삭제
                     deleteData()
-
                 })
                 setPositiveButton("NO", null)
                 show()
             }
             return true
+        } else if(item.itemId == R.id.refresh) {
+            Log.d("kk","but")
+            refreshActivity()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -136,17 +136,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initData() {
-        contents.add(Career("test", "테스트입니다"))
-        contents.add(Career("", ""))
+        contents.add(Career(0,"test", "테스트입니다"))
+        contents.add(Career(0,"", ""))
 
         val db = DBHelper(this).readableDatabase
         val cursor = db.rawQuery("select * from CAREER_TB", null) // 앱 시작 시 DB 읽어오기
         cursor.run {
             while (moveToNext()) {
-                contents?.add(Career(cursor.getString(1), cursor.getString(2)))
+                contents?.add(Career(cursor.getInt(0), cursor.getString(1), cursor.getString(2)))
             }
         }
     }
 
-
+    fun refreshActivity() {
+        val intent = getIntent()
+        finish()
+        startActivity(intent)
+    }
 }

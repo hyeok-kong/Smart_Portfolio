@@ -1,34 +1,38 @@
 package kr.ac.hallym.termproject
 
 import android.app.Activity
-import android.app.ProgressDialog.show
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.Intent.getIntent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AlertDialog
-import kr.ac.hallym.termproject.databinding.ActivityAddBinding
+import kr.ac.hallym.termproject.databinding.ActivityEditBinding
 import kr.ac.hallym.termproject.databinding.ActivityMainBinding
 
-class AddActivity : AppCompatActivity() {
-    lateinit var binding: ActivityAddBinding
+class EditActivity : AppCompatActivity() {
+    lateinit var binding: ActivityEditBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_add)
-        binding = ActivityAddBinding.inflate(layoutInflater)
+        //setContentView(R.layout.activity_edit)
+        binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val title = intent.getStringExtra("title")
+        val detail = intent.getStringExtra("detail")
+
+        binding.addTitle.setText(title)
+        binding.addDetail.setText(detail)
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add, menu)
@@ -45,7 +49,7 @@ class AddActivity : AppCompatActivity() {
 
                 dialog.run {
                     setTitle("모바일 이력서")
-                    setMessage("작성중인 내용이 사라집니다.\n정말 종료하시겠습니까?")
+                    setMessage("내용이 변경되지 않습니다.\n취소하시겠습니까?")
                     setNegativeButton("YES", DialogInterface.OnClickListener { dialog, id ->
                         finish()
                     })
@@ -59,6 +63,7 @@ class AddActivity : AppCompatActivity() {
             }
         }
         R.id.menu_add_save -> {
+            val itemId = intent.getStringExtra("id")?.toInt()
             val tt = binding.addTitle.text.toString()
             val dt = binding.addDetail.text.toString()
             val db = DBHelper(this).writableDatabase
@@ -69,15 +74,13 @@ class AddActivity : AppCompatActivity() {
                 false
             } else {
                 db.execSQL(
-                    "insert into CAREER_TB (title, detail) values (?,?)",
-                    arrayOf(tt, dt)
+                    "update CAREER_TB set title=?, detail=? where _id=?",
+                    arrayOf(tt, dt, itemId)
                 )
                 db.close()
-//                intent.putExtra("title", tt)
-//                intent.putExtra("detail", dt)
-                setResult(Activity.RESULT_OK, intent)
                 finish()
-                val toast = Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT)
+
+                val toast = Toast.makeText(this, "변경되었습니다. 새로고침을 해주세요.", Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.BOTTOM, 0, 100)
                 toast.show()
                 true
@@ -95,7 +98,7 @@ class AddActivity : AppCompatActivity() {
 
             dialog.run {
                 setTitle("모바일 이력서")
-                setMessage("작성중인 내용이 사라집니다.\n정말 종료하시겠습니까?")
+                setMessage("내용이 변경되지 않습니다.\n취소하시겠습니까?")
                 setNegativeButton("YES", DialogInterface.OnClickListener { dialog, id ->
                     finish()
                 })

@@ -6,6 +6,12 @@
     android:layout_margin="8dp"
     android:id="@+id/item_root">
 
+    <TextView
+        android:id="@+id/item_id"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""/>
+
     <ImageView
         android:layout_width="50dp"
         android:layout_height="wrap_content"

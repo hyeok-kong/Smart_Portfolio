@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/refresh"
+        app:showAsAction="always"
+        android:title="refresh"
+        android:icon="@android:drawable/ic_menu_rotate" />
+    <item
         android:id="@+id/delete_all_list"
         android:title="Delete All"
         app:showAsAction="never" />

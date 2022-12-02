@@ -24,8 +24,9 @@
         android:layout_height="30dp" />
 
     <ImageView
+        android:id="@+id/profile"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="430dp"
         android:adjustViewBounds="true"
         android:src="@drawable/profile"
         android:layout_gravity="center_horizontal"/>
