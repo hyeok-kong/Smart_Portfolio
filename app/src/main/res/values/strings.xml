@@ -3,5 +3,7 @@
 
     <string name="drawer_opened">Opened Drawer</string>
     <string name="drawer_closed">Closed Drawer</string>
-    <string name="address"><u>https://github.com/hyeok-kong</u></string>
+    <string name="github_address"><u>https://github.com/hyeok-kong</u></string>
+    <string name="blog_address"><u>https://velog.io/@hyeok-kong</u></string>
+
 </resources>

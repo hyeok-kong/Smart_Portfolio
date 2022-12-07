@@ -136,8 +136,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initData() {
-        contents.add(Career(0,"test", "테스트입니다"))
-        contents.add(Career(0,"", ""))
+        contents.add(Career(0,"한림대학교 입학","기간 : 2018.03~2023.12"))
+        contents.add(Career(0,"해커톤 참가", "제 1회 2019 강원 학생 SW 아이디어 해커톤"))
+        contents.add(Career(0,"교내 코딩테스트 캠프 수료", "2022 여름방학 코딩테스트 대비 캠프"))
+        contents.add(Career(0,"2022-2학기 교과목 멘토링", "교과목 보조, 조교활동 진행"))
+        contents.add(Career(0,"2022 제 5회 SW Coding Festival", "교내 코딩테스트 대회 동상"))
+        contents.add(Career(0,"TOPCIT 정기평가", "260점"))
 
         val db = DBHelper(this).readableDatabase
         val cursor = db.rawQuery("select * from CAREER_TB", null) // 앱 시작 시 DB 읽어오기

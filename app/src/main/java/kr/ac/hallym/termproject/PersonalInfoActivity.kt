@@ -127,6 +127,28 @@ class PersonalInfoActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        binding.addressBlog.setOnClickListener {
+            val dialogBinding = DialogChooseWebviewBinding.inflate(layoutInflater)
+
+            val dialog = AlertDialog.Builder(this).apply {
+                setView(dialogBinding.root)
+            }.create()
+            dialog.show()
+
+            dialogBinding.webView.setOnClickListener {
+                dialog.dismiss()
+                val intent = Intent(this, WebActivity::class.java)
+                intent.putExtra("address", binding.addressBlog.text.toString())
+                startActivity(intent)
+            }
+            dialogBinding.otherBrowsers.setOnClickListener {
+                dialog.dismiss()
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(binding.addressBlog.text.toString()))
+                intent.setPackage("com.android.chrome") // 브라우저를 크롬으로 고정
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {

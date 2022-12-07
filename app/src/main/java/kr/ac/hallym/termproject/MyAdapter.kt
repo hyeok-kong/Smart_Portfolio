@@ -1,11 +1,13 @@
 package kr.ac.hallym.termproject
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.ac.hallym.termproject.databinding.ActivityMainBinding
@@ -47,15 +49,24 @@ class MyAdapter(val contents: MutableList<Career>): RecyclerView.Adapter<Recycle
                     }
                     R.id.delete_recycler -> {
                         Log.d("kk","click ${binding.itemId.text} item delete")
-                        val id = binding.itemId.text.toString()
+                        val dbId = binding.itemId.text.toString()
                         val db = DBHelper(v).writableDatabase
-                        if(id == "0") {
+                        if(dbId == "0") {
                             Toast.makeText(v, "기본 데이터는 삭제할 수 없습니다.", Toast.LENGTH_SHORT).show()
                         } else {
-                            db.execSQL("delete from CAREER_TB where _id=?",
-                                arrayOf(id.toInt()))
+                            val dialog = AlertDialog.Builder(v)
 
-                            Toast.makeText(v, "삭제되었습니다. 새로고침을 해주세요", Toast.LENGTH_SHORT).show()
+                            dialog.run {
+                                setTitle("모바일 이력서")
+                                setMessage("정말 삭제하시겠습니까?")
+                                setNegativeButton("YES", DialogInterface.OnClickListener { dialog, id ->
+                                    db.execSQL("delete from CAREER_TB where _id=?",
+                                        arrayOf(dbId.toInt()))
+                                    Toast.makeText(v, "삭제되었습니다. 새로고침을 해주세요", Toast.LENGTH_SHORT).show()
+                                })
+                                setPositiveButton("NO", null)
+                                show()
+                            }
                         }
                         true
                     }

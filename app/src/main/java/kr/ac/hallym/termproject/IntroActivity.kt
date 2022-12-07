@@ -17,8 +17,8 @@ class IntroActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.introButton.setOnClickListener {
-            val Intent = Intent(this, SplashActivity::class.java)
-            startActivity(Intent)
+            val intent = Intent(this, SplashActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
