@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, PersonalInfoActivity::class.java)
                     startActivity(intent)
                 }
+                "Projects" -> {
+                    val intent = Intent(this, ProjectActivity::class.java)
+                    startActivity(intent)
+                }
                 "Logout" -> { // 시작화면으로 이동 (앱 재시작)
                     finishAffinity()
                     val intent = Intent(this, IntroActivity::class.java)
@@ -65,7 +69,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
 
         val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()

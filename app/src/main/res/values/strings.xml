@@ -5,5 +5,7 @@
     <string name="drawer_closed">Closed Drawer</string>
     <string name="github_address"><u>https://github.com/hyeok-kong</u></string>
     <string name="blog_address"><u>https://velog.io/@hyeok-kong</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

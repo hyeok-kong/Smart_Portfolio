@@ -5,6 +5,9 @@
         android:icon="@android:drawable/ic_menu_share"
         android:title="Personal Details" />
     <item
+        android:icon="@android:drawable/ic_menu_upload"
+        android:title="Projects" />
+    <item
         android:icon="@android:drawable/ic_menu_help"
         android:title="Logout" />
 </menu>
